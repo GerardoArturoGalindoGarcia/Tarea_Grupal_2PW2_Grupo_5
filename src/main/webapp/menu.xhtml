@@ -42,11 +42,14 @@
                 background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
                 color:white;
                 padding:40px 20px;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
             }
 
             .logo{
                 width:280px;
-                margin-bottom:10px;
+                margin:10px 0;
             }
 
             .titulo{
@@ -87,22 +90,19 @@
                 box-shadow:0 10px 25px rgba(0,0,0,0.25);
             }
 
-            .icono{
-                font-size:40px;
-            }
-
             .bienvenida{
-                margin-top:15px;
+                margin-top:5px;
                 font-size:20px;
                 font-weight:bold;
                 color:white;
             }
 
             .ultimaconexion{
-                margin-top:15px;
+                margin-bottom:5px;
                 font-size:20px;
                 font-weight:bold;
                 color:white;
+                order:-1;
             }
 
         </style>
@@ -115,25 +115,17 @@
         <h:form>
 
             <div class="contenedor">
-
-
                 <!-- ENCABEZADO -->
                 <div class="encabezado">
-
                     <h:outputText
                             value="Ultima conexion: #{LoginBean.ultimaSesionFormato}"
                             styleClass="ultimaconexion"/>
-
                     <h:graphicImage library="imagenes"
                                     name="logo_fico.png"
                                     styleClass="logo"/>
-
-                    <div class="titulo">MENU PRINCIPAL</div>
-
                     <h:outputText
                             value="Bienvenido(a), #{LoginBean.cliente.nombreCompleto}"
                             styleClass="bienvenida"/>
-
                 </div>
 
                 <!-- BOTONES -->
