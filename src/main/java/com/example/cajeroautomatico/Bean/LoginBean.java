@@ -2,7 +2,6 @@ package com.example.cajeroautomatico.Bean;
 
 import com.example.cajeroautomatico.data.Cliente;
 import com.example.cajeroautomatico.data.ArchivoClientes;
-
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -16,6 +15,7 @@ import java.time.LocalDateTime;
 @SessionScoped
 
 public class LoginBean implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String usuario;
     private String pin;
@@ -23,28 +23,50 @@ public class LoginBean implements Serializable {
     private final ArchivoClientes archivoClientes = new ArchivoClientes();
 
     public String iniciarSesion() {
+        try {
+            if (usuario == null || usuario.trim().isEmpty() || 
+                pin == null || pin.trim().isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "Error",
+                                "Usuario y PIN son requeridos."
+                        )
+                );
+                return null;
+            }
 
+            cliente = archivoClientes.validarLogin(usuario.trim(), pin.trim());
 
-        cliente = archivoClientes.validarLogin(usuario, pin);
+            if (cliente != null) {
+                cliente.setUltimaSesion(LocalDateTime.now());
+                archivoClientes.actualizarCliente(cliente);
+                System.out.println("LOGIN EXITOSO: " + usuario);
+                return "menu?faces-redirect=true";
+            }
 
-        if (cliente != null) {
+            System.out.println("LOGIN FALLIDO: Usuario o PIN incorrectos para: " + usuario);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "Error",
+                            "Usuario o PIN incorrectos."
+                    )
+            );
 
-            // Actualizar fecha de último acceso
-            cliente.setUltimaSesion(LocalDateTime.now());
-
-            archivoClientes.actualizarCliente(cliente);
-
-            return "menu?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "Error",
+                            "Error en el sistema de autenticación: " + e.getMessage()
+                    )
+            );
         }
-
-        FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(
-                        FacesMessage.SEVERITY_ERROR,
-                        "Error",
-                        "Usuario o PIN incorrectos."
-                )
-        );
 
         return null;
     }
@@ -83,11 +105,4 @@ public class LoginBean implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public ArchivoClientes getArchivoClientes() {
-        return archivoClientes;
-    }
-
-    public void setArchivoClientes(ArchivoClientes archivoClientes) {}
 }
-

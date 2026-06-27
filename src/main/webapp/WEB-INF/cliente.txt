@@ -1,0 +1,5 @@
+usuario001,1234,Juan Carlos García,100001,2500.50,2026-01-15 10:30:00
+usuario002,5678,María Elena Rodríguez,100002,1850.75,2026-01-14 14:45:00
+usuario003,9012,Carlos Andrés Moreno,100003,3200.00,2026-01-13 09:15:00
+usuario004,3456,Laura Fernanda López,100004,1500.25,2026-01-12 16:20:00
+usuario005,7890,Roberto Javier Martinez,100005,4100.80,2026-01-11 11:50:00
