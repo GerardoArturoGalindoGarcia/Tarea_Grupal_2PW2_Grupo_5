@@ -77,7 +77,7 @@ public class LoginBean implements Serializable {
                 .getExternalContext()
                 .invalidateSession();
 
-        return "login?faces-redirect=true";
+        return "/Login.xhtml?faces-redirect=true";
     }
 
     // Getters y Setters
