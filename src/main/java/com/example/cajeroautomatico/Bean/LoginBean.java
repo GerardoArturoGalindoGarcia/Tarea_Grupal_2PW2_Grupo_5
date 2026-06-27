@@ -2,6 +2,7 @@ package com.example.cajeroautomatico.Bean;
 
 import com.example.cajeroautomatico.data.Cliente;
 import com.example.cajeroautomatico.data.ArchivoClientes;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -18,9 +19,7 @@ public class LoginBean implements Serializable {
 
     private String usuario;
     private String pin;
-
     private Cliente cliente;
-
     private final ArchivoClientes archivoClientes = new ArchivoClientes();
 
     public String iniciarSesion() {

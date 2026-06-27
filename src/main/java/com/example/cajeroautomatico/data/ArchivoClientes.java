@@ -2,8 +2,6 @@ package com.example.cajeroautomatico.data;
 
 import java.io.Serializable;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.List;
 public class ArchivoClientes implements Serializable {
 
     // Ruta del archivo
-    private final String RUTA = "src/main/resources/clientes.txt";
+    private final String RUTA = "src/main/resources/cliente.txt";
 
     // Formato de fecha
     private final DateTimeFormatter formatter =
@@ -22,6 +20,7 @@ public class ArchivoClientes implements Serializable {
      * Lee todos los clientes del archivo.
      */
     public List<Cliente> obtenerClientes() {
+
 
         List<Cliente> clientes = new ArrayList<>();
 
@@ -49,6 +48,7 @@ public class ArchivoClientes implements Serializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
         return clientes;

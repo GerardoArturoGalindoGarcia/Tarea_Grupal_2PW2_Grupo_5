@@ -233,7 +233,7 @@
 
                         <h:inputText
                                 id="usuario"
-                                value="#{loginBean.usuario}"
+                                value="#{LoginBean.usuario}"
                                 styleClass="campo"
                                 required="true"
                                 requiredMessage="Debe ingresar el usuario."
@@ -250,7 +250,7 @@
 
                         <h:inputSecret
                                 id="pin"
-                                value="#{loginBean.pin}"
+                                value="#{LoginBean.pin}"
                                 styleClass="campo"
                                 required="true"
                                 requiredMessage="Debe ingresar el PIN."
@@ -262,12 +262,12 @@
 
                         <h:commandButton
                                 value="Ingresar"
-                                action="#{loginBean.iniciarSesion}"
+                                action="#{LoginBean.iniciarSesion}"
                                 styleClass="btnIngresar"/>
 
                         <h:commandButton
                                 value="Cancelar"
-                                action="#{loginBean.cerrarSesion}"
+                                action="#{LoginBean.cerrarSesion}"
                                 immediate="true"
                                 styleClass="btnCancelar"/>
 

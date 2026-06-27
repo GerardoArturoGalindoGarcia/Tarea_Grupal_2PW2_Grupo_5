@@ -1,9 +1,10 @@
 package com.example.cajeroautomatico.data;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 
-public class Cliente implements java.io.Serializable {
+public class Cliente implements Serializable {
     private String usuario;
     private String pin;
     private String nombreCompleto;
