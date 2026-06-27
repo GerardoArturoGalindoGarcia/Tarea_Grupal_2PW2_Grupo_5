@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Named("LoginBean")
 @SessionScoped
@@ -110,5 +111,13 @@ public class LoginBean implements Serializable {
 
     public ArchivoClientes getArchivoClientes() {
         return archivoClientes;
+    }
+
+    public String getUltimaSesionFormato() {
+        if (cliente != null && cliente.getUltimaSesion() != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
+            return cliente.getUltimaSesion().format(formatter);
+        }
+        return "";
     }
 }
