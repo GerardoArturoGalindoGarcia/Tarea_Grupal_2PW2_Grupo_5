@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core">
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
 
 <f:view>
 
@@ -160,11 +161,6 @@
                 transform:translateY(-2px);
             }
 
-            .btnIngresar:active {
-                transform:translateY(0);
-                box-shadow:0 2px 10px rgba(0,52,142,0.3);
-            }
-
             .btnCancelar{
                 background: linear-gradient(135deg, #E53935 0%, #C62828 100%);
                 color:white;
@@ -186,9 +182,8 @@
                 transform:translateY(-2px);
             }
 
-            .btnCancelar:active {
-                transform:translateY(0);
-                box-shadow:0 2px 10px rgba(198,40,40,0.3);
+            .mensaje{
+                margin-bottom:20px;
             }
 
         </style>
@@ -197,15 +192,16 @@
 
     <h:body>
 
-        <h:form>
+        <h:form id="frmLogin">
 
             <div class="contenedor">
 
                 <div class="encabezado">
 
-                    <h:graphicImage library="imagenes"
-                                    name="logo_fico.png"
-                                    styleClass="logo"/>
+                    <h:graphicImage
+                            library="imagenes"
+                            name="logo_fico.png"
+                            styleClass="logo"/>
 
                     <div class="titulo">
                         CAJERO AUTOMÁTICO
@@ -219,39 +215,61 @@
 
                 <div class="contenido">
 
-                    <div class="grupo-campo">
-                        <h:outputLabel for="username"
-                                       value="Número de Cuenta"
-                                       styleClass="etiqueta"/>
-
-                        <h:inputText id="username"
-                                     value="#{loginBean.username}"
-                                     styleClass="campo"
-                                     required="true"
-                                     placeholder="Ingrese su Usuario"/>
+                    <div class="mensaje">
+                        <h:messages
+                                globalOnly="true"
+                                style="color:red;
+               font-weight:bold;
+               margin-bottom:15px;
+               display:block;"/>
                     </div>
 
                     <div class="grupo-campo">
-                        <h:outputLabel for="password"
-                                       value="PIN"
-                                       styleClass="etiqueta"/>
 
-                        <h:inputSecret id="password"
-                                       value="#{loginBean.password}"
-                                       styleClass="campo"
-                                       required="true"
-                                       placeholder="Ingresa tu PIN"/>
+                        <h:outputLabel
+                                for="usuario"
+                                value="Usuario"
+                                styleClass="etiqueta"/>
+
+                        <h:inputText
+                                id="usuario"
+                                value="#{loginBean.usuario}"
+                                styleClass="campo"
+                                required="true"
+                                requiredMessage="Debe ingresar el usuario."
+                                pt:placeholder="Ingrese su usuario"/>
+
+                    </div>
+
+                    <div class="grupo-campo">
+
+                        <h:outputLabel
+                                for="pin"
+                                value="PIN"
+                                styleClass="etiqueta"/>
+
+                        <h:inputSecret
+                                id="pin"
+                                value="#{loginBean.pin}"
+                                styleClass="campo"
+                                required="true"
+                                requiredMessage="Debe ingresar el PIN."
+                                pt:placeholder="Ingrese su PIN"/>
+
                     </div>
 
                     <div class="botones">
 
-                        <h:commandButton value="Ingresar"
-                                         action="#{loginBean.login}"
-                                         styleClass="btnIngresar"/>
+                        <h:commandButton
+                                value="Ingresar"
+                                action="#{loginBean.iniciarSesion}"
+                                styleClass="btnIngresar"/>
 
-                        <h:commandButton value="Cancelar"
-                                         type="reset"
-                                         styleClass="btnCancelar"/>
+                        <h:commandButton
+                                value="Cancelar"
+                                action="#{loginBean.cerrarSesion}"
+                                immediate="true"
+                                styleClass="btnCancelar"/>
 
                     </div>
 
