@@ -1,16 +1,17 @@
 package com.example.cajeroautomatico.Bean;
 
+import com.example.cajeroautomatico.data.Cliente;
+import com.example.cajeroautomatico.data.ArchivoClientes;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import java.io.Serializable;
 import jakarta.inject.Named;
-import com.example.cajeroautomatico.data.Cliente;
-import com.example.cajeroautomatico.data.ArchivoClientes;
+
 
 import java.time.LocalDateTime;
 
-@Named
+@Named("LoginBean")
 @SessionScoped
 
 public class LoginBean implements Serializable {
@@ -23,6 +24,7 @@ public class LoginBean implements Serializable {
     private final ArchivoClientes archivoClientes = new ArchivoClientes();
 
     public String iniciarSesion() {
+
 
         cliente = archivoClientes.validarLogin(usuario, pin);
 
@@ -82,5 +84,11 @@ public class LoginBean implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public ArchivoClientes getArchivoClientes() {
+        return archivoClientes;
+    }
+
+    public void setArchivoClientes(ArchivoClientes archivoClientes) {}
 }
 

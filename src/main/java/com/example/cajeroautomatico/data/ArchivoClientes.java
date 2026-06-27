@@ -59,9 +59,11 @@ public class ArchivoClientes implements Serializable {
      */
     public Cliente validarLogin(String usuario, String pin) {
 
+
         List<Cliente> clientes = obtenerClientes();
 
         for (Cliente cliente : clientes) {
+
 
             if (cliente.getUsuario().equals(usuario)
                     && cliente.getPin().equals(pin)) {
