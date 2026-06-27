@@ -3,6 +3,7 @@
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core">
 
+
 <f:view>
 
     <h:head>
@@ -114,29 +115,39 @@
                 <div class="contenido">
 
                     <!-- RETIRO -->
-                    <h:commandButton value="RETIRO"
-                                     action="retiro?faces-redirect=true"
-                                     styleClass="btnMenu"/>
+                    <h:commandLink action="retiro?faces-redirect=true" styleClass="btnMenu">
+                        <h:graphicImage library="imagenes"
+                                        name="Retiro.png"
+                                        style="width:132px;height:132px;vertical-align:middle;margin-right:1px;"/>
+                    </h:commandLink>
 
                     <!-- DEPOSITO -->
-                    <h:commandButton value="DEPÓSITO"
-                                     action="deposito?faces-redirect=true"
-                                     styleClass="btnMenu"/>
+                    <h:commandLink  action="deposito?faces-redirect=true" styleClass="btnMenu">
+                        <h:graphicImage library="imagenes"
+                                        name="deposito.png"
+                                        style="width:132px;height:132px;vertical-align:middle;margin-right:1px;"/>
+                    </h:commandLink>
 
                     <!-- CONSULTAR SALDO -->
-                    <h:commandButton value="CONSULTAR SALDO"
-                                     action="saldo?faces-redirect=true"
-                                     styleClass="btnMenu"/>
+                    <h:commandLink action="saldo?faces-redirect=true" styleClass="btnMenu">
+                        <h:graphicImage library="imagenes"
+                                        name="saldo.png"
+                                        style="width:132px;height:132px;vertical-align:middle;margin-right:1px;"/>
+                    </h:commandLink>
 
                     <!-- ESTADO CUENTA -->
-                    <h:commandButton value="ESTADO CUENTA"
-                                     action="estado?faces-redirect=true"
-                                     styleClass="btnMenu"/>
+                    <h:commandLink action="estado?faces-redirect=true" styleClass="btnMenu">
+                        <h:graphicImage library="imagenes"
+                                        name="cuenta.png"
+                                        style="width:132px;height:132px;vertical-align:middle;margin-right:1px;"/>
+                    </h:commandLink>
 
                     <!-- CERRAR SESIÓN -->
-                    <h:commandButton value="CERRAR SESIÓN"
-                                     action="cerrar?faces-redirect=true"
-                                     styleClass="btnMenu"/>
+                    <h:commandLink action="com.example.cajeroautomatico.Bean.cerrarSesion" styleClass="btnMenu">
+                        <h:graphicImage library="imagenes"
+                                        name="cerrar sesion.png"
+                                        style="width:132px;height:132px;vertical-align:middle;margin-right:1px;"/>
+                    </h:commandLink>
                 </div>
 
             </div>
