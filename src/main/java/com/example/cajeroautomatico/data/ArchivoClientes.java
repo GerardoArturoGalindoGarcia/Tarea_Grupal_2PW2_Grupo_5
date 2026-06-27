@@ -1,6 +1,7 @@
 package com.example.cajeroautomatico.data;
 
-import java.io.Serializable;
+import jakarta.faces.context.FacesContext;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class ArchivoClientes implements Serializable {
 
-    // Ruta del archivo
-    private final String RUTA = "src/main/resources/cliente.txt";
+    // Ruta del archivo dentro de WEB-INF
+    private final String RUTA = "/WEB-INF/cliente.txt";
 
     // Formato de fecha
     private final DateTimeFormatter formatter =
@@ -21,10 +22,18 @@ public class ArchivoClientes implements Serializable {
      */
     public List<Cliente> obtenerClientes() {
 
-
         List<Cliente> clientes = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(RUTA))) {
+        InputStream is = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getResourceAsStream(RUTA);
+
+        if (is == null) {
+            System.out.println("ERROR: No se encontró el archivo " + RUTA);
+            return clientes;
+        }
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
             String linea;
 
@@ -40,15 +49,14 @@ public class ArchivoClientes implements Serializable {
                 cliente.setCuenta(datos[3]);
                 cliente.setSaldoDisponible(Double.parseDouble(datos[4]));
                 cliente.setUltimaSesion(
-                        LocalDateTime.parse(datos[5], formatter));
+                        LocalDateTime.parse(datos[5], formatter)
+                );
 
                 clientes.add(cliente);
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
         return clientes;
@@ -59,18 +67,14 @@ public class ArchivoClientes implements Serializable {
      */
     public Cliente validarLogin(String usuario, String pin) {
 
-
         List<Cliente> clientes = obtenerClientes();
 
         for (Cliente cliente : clientes) {
 
-
             if (cliente.getUsuario().equals(usuario)
                     && cliente.getPin().equals(pin)) {
-
                 return cliente;
             }
-
         }
 
         return null;
@@ -86,21 +90,23 @@ public class ArchivoClientes implements Serializable {
         for (Cliente cliente : clientes) {
 
             if (cliente.getCuenta().equals(cuenta)) {
-
                 return cliente;
             }
-
         }
 
         return null;
     }
 
     /**
-     * Actualiza todos los clientes en el archivo.
+     * Guarda todos los clientes en el archivo.
      */
     public void guardarClientes(List<Cliente> clientes) {
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(RUTA))) {
+        String realPath = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getRealPath(RUTA);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(realPath))) {
 
             for (Cliente cliente : clientes) {
 
@@ -114,13 +120,11 @@ public class ArchivoClientes implements Serializable {
                 );
 
                 bw.newLine();
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -134,21 +138,13 @@ public class ArchivoClientes implements Serializable {
 
             if (cliente.getCuenta().equals(clienteActualizado.getCuenta())) {
 
-                cliente.setSaldoDisponible(
-                        clienteActualizado.getSaldoDisponible());
-
-                cliente.setUltimaSesion(
-                        clienteActualizado.getUltimaSesion());
+                cliente.setSaldoDisponible(clienteActualizado.getSaldoDisponible());
+                cliente.setUltimaSesion(clienteActualizado.getUltimaSesion());
 
                 break;
             }
-
         }
 
         guardarClientes(clientes);
-
     }
-
-
-
 }
