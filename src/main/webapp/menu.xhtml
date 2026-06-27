@@ -9,6 +9,7 @@
     <h:head>
         <title>Menú - Cajero Automático</title>
 
+
         <style>
 
             body{
@@ -90,24 +91,48 @@
                 font-size:40px;
             }
 
+            .bienvenida{
+                margin-top:15px;
+                font-size:20px;
+                font-weight:bold;
+                color:white;
+            }
+
+            .ultimaconexion{
+                margin-top:15px;
+                font-size:20px;
+                font-weight:bold;
+                color:white;
+            }
+
         </style>
 
     </h:head>
 
     <h:body>
 
+
         <h:form>
 
             <div class="contenedor">
 
+
                 <!-- ENCABEZADO -->
                 <div class="encabezado">
+
+                    <h:outputText
+                            value="Ultima conexion: #{LoginBean.cliente.ultimaSesion}"
+                            styleClass="ultimaconexion"/>
 
                     <h:graphicImage library="imagenes"
                                     name="logo_fico.png"
                                     styleClass="logo"/>
 
-                    <div class="titulo">MENÚ PRINCIPAL</div>
+                    <div class="titulo">MENU PRINCIPAL</div>
+
+                    <h:outputText
+                            value="Bienvenido(a), #{LoginBean.cliente.nombreCompleto}"
+                            styleClass="bienvenida"/>
 
                 </div>
 

@@ -16,7 +16,7 @@ public class ArchivoClientes implements Serializable {
 
     // Formato de fecha
     private final DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Lee todos los clientes del archivo.

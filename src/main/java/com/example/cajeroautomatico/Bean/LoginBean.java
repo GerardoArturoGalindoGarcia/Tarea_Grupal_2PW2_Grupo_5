@@ -22,7 +22,9 @@ public class LoginBean implements Serializable {
     private Cliente cliente;
     private final ArchivoClientes archivoClientes = new ArchivoClientes();
 
+
     public String iniciarSesion() {
+
         try {
             if (usuario == null || usuario.trim().isEmpty() || 
                 pin == null || pin.trim().isEmpty()) {
@@ -104,5 +106,9 @@ public class LoginBean implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public ArchivoClientes getArchivoClientes() {
+        return archivoClientes;
     }
 }
