@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/layout.xhtml">
+    <ui:define name="content">
+        <div class="container-retiro" style="max-width: 500px; margin: 0 auto; padding: 20px;">
+            <h:form id="formRetiro">
+                <h2>Módulo de Retiros</h2>
+                <hr/>
+
+                <h:messages id="mensajes" globalOnly="false" styleClass="mensajes-sistema"
+                            errorStyle="color: red; list-style-type: none; font-weight: bold;"
+                            infoStyle="color: green; list-style-type: none; font-weight: bold;"/>
+
+                <h:panelGrid columns="2" cellpadding="10" style="width: 100%; margin-bottom: 20px;">
+
+                    <h:outputLabel value="Nombre del Cliente:" style="font-weight: bold;"/>
+                    <h:outputText value="#{LoginBean.cliente.nombreCompleto}" />
+
+                    <h:outputLabel value="Número de Cuenta:" style="font-weight: bold;"/>
+                    <h:outputText value="#{LoginBean.cliente.cuenta}" />
+
+                    <h:outputLabel value="Monto Disponible:" style="font-weight: bold;"/>
+                    <h:outputText value="L. #{LoginBean.cliente.saldoDisponible}" style="color: green; font-weight: bold;" />
+
+                    <h:outputLabel value="Monto a Retirar (L.):" style="font-weight: bold;"/>
+                    <h:inputText id="monto" value="#{LoginBean.montoTransaccion}" required="true"
+                                 requiredMessage="Por favor, ingrese un monto a retirar.">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </h:inputText>
+
+                </h:panelGrid>
+
+                <div class="botones-accion" style="display: flex; gap: 10px;">
+                    <h:commandButton value="Confirmar" action="#{LoginBean.procesarRetiro}"
+                                     style="background-color: #004b87; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold;"/>
+
+                    <h:commandButton value="Salir" action="menu?faces-redirect=true" immediate="true"
+                                     style="background-color: #d32f2f; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold;"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>
