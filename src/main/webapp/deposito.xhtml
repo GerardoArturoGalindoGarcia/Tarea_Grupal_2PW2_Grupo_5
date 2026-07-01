@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<f:view>
+    <h:head>
+        <title>Depósitos - Cajero Automático</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .contenedor {
+                width: 500px;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(0,0,0,.3);
+                overflow: hidden;
+                padding: 30px;
+            }
+            .encabezado-modulo {
+                text-align: center;
+                color: #003B8E;
+                margin-bottom: 20px;
+            }
+            .grid-datos {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .label-form {
+                font-weight: bold;
+                color: #333;
+            }
+            .input-form {
+                width: 100%;
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+            .btn-confirmar {
+                background-color: #004b87;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-confirmar:hover {
+                background-color: #003366;
+            }
+            .btn-salir {
+                background-color: #d32f2f;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                text-decoration: none;
+                text-align: center;
+                transition: background 0.3s;
+            }
+            .btn-salir:hover {
+                background-color: #b71c1c;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <div class="contenedor">
+            <h:form id="formDeposito">
+                <div class="encabezado-modulo">
+                    <h2>Módulo de Depósitos</h2>
+                    <hr style="border: 1px solid #003B8E;"/>
+                </div>
+
+                <h:messages id="mensajes" globalOnly="false"
+                            errorStyle="color: red; list-style-type: none; font-weight: bold; margin-bottom: 15px;"
+                            infoStyle="color: green; list-style-type: none; font-weight: bold; margin-bottom: 15px;"/>
+
+                <h:panelGrid columns="2" cellpadding="10" styleClass="grid-datos">
+
+                    <h:outputLabel value="Nombre del Cliente:" styleClass="label-form"/>
+                    <h:outputText value="#{LoginBean.cliente.nombreCompleto}" style="font-weight: bold; color: #555;"/>
+
+                    <h:outputLabel value="Número de Cuenta:" styleClass="label-form"/>
+                    <h:outputText value="#{LoginBean.cliente.cuenta}" style="color: #555;"/>
+
+                    <h:outputLabel value="Monto Disponible:" styleClass="label-form"/>
+                    <h:outputText value="L. #{LoginBean.cliente.saldoDisponible}" style="color: green; font-weight: bold;" />
+
+                    <h:outputLabel value="Monto a Depositar (L.):" styleClass="label-form"/>
+                    <h:inputText id="monto" value="#{depositoBean.montoDeposito}" required="true" styleClass="input-form"
+                                 autocomplete="off" requiredMessage="Por favor, ingrese un monto a depositar.">
+                        <f:passThroughAttribute name="placeholder" value="0.00" />
+                        <f:passThroughAttribute name="onfocus" value="if(this.value=='0.00' || this.value=='0') this.value='';" />
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                    </h:inputText>
+
+                    <h:outputLabel value="PIN de Seguridad:" styleClass="label-form"/>
+                    <h:inputSecret id="pin" value="#{depositoBean.pinIngresado}" required="true" styleClass="input-form"
+                                   requiredMessage="Por favor, ingrese su PIN para confirmar." maxlength="4"/>
+
+                </h:panelGrid>
+
+                <div class="botones-accion" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+                    <h:commandButton value="Confirmar Depósito" action="#{depositoBean.procesarDeposito}" styleClass="btn-confirmar"/>
+                    <h:commandButton value="Salir" action="menu?faces-redirect=true" immediate="true" styleClass="btn-salir"/>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>
