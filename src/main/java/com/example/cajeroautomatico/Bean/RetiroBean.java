@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class RetiroBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private String pinIngresado;
 
     @Inject
     private LoginBean loginBean;
@@ -31,17 +32,14 @@ public class RetiroBean implements Serializable {
 
         Cliente cliente = loginBean.getCliente();
 
-        if (cliente == null) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR,
-                            "Error",
-                            "La sesión ha expirado."
-                    )
-            );
-            return "Login?faces-redirect=true";
+        if (pinIngresado == null || !pinIngresado.equals(cliente.getPin())) {
+            jakarta.faces.context.FacesContext.getCurrentInstance().addMessage(null,
+                    new jakarta.faces.application.FacesMessage(jakarta.faces.application.FacesMessage.SEVERITY_ERROR,
+                            "PIN inválido: El código de seguridad ingresado no es correcto.", null));
+            return null;
         }
+
+
 
         try {
 
@@ -125,4 +123,12 @@ public class RetiroBean implements Serializable {
         this.montoTransaccion = montoTransaccion;
     }
 
+
+    public String getPinIngresado() {
+        return pinIngresado;
+    }
+
+    public void setPinIngresado(String pinIngresado) {
+        this.pinIngresado = pinIngresado;
+    }
 }
