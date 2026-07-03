@@ -13,7 +13,7 @@ import com.example.cajeroautomatico.data.ArchivoHistorial;
 
 import java.io.Serializable;
 
-@Named("RetiroBean")
+@Named("retiroBean")
 @SessionScoped
 public class RetiroBean implements Serializable {
 

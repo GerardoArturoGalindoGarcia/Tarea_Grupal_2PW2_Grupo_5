@@ -1,82 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
 
-<f:view>
-    <h:head>
-        <title>Depósitos - Cajero Automático</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .contenedor {
-                width: 500px;
-                background: white;
-                border-radius: 20px;
-                box-shadow: 0 10px 40px rgba(0,0,0,.3);
-                overflow: hidden;
-                padding: 30px;
-            }
-            .encabezado-modulo {
-                text-align: center;
-                color: #003B8E;
-                margin-bottom: 20px;
-            }
-            .grid-datos {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-            .label-form {
-                font-weight: bold;
-                color: #333;
-            }
-            .input-form {
-                width: 100%;
-                padding: 8px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                box-sizing: border-box;
-            }
-            .btn-confirmar {
-                background-color: #004b87;
-                color: white;
-                padding: 12px 20px;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-weight: bold;
-                transition: background 0.3s;
-            }
-            .btn-confirmar:hover {
-                background-color: #003366;
-            }
-            .btn-salir {
-                background-color: #d32f2f;
-                color: white;
-                padding: 12px 20px;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-weight: bold;
-                text-decoration: none;
-                text-align: center;
-                transition: background 0.3s;
-            }
-            .btn-salir:hover {
-                background-color: #b71c1c;
-            }
-        </style>
-    </h:head>
-
-    <h:body>
+<ui:composition template="/layout.xhtml">
+    <ui:define name="title">Depósitos - Cajero Automático</ui:define>
+    <ui:define name="content">
         <div class="contenedor">
             <h:form id="formDeposito">
                 <div class="encabezado-modulo">
@@ -119,6 +49,6 @@
                 </div>
             </h:form>
         </div>
-    </h:body>
-</f:view>
+    </ui:define>
+</ui:composition>
 </html>
