@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+
+<ui:composition template="/layout.xhtml">
+    <ui:define name="title">Consulta de Saldo - Cajero Automático</ui:define>
+    <ui:define name="content">
+        <div class="contenedor">
+            <h:form id="formConsulta">
+                <div class="encabezado-modulo">
+                    <h2>Módulo de Consulta de Saldo</h2>
+                    <hr style="border: 1px solid #003B8E;"/>
+                </div>
+
+                <div class="grid-datos">
+                    <div>
+                        <label class="label-form">Nombre completo:</label>
+                        <div>
+                            <h:outputText value="#{consultarSaldoBean.nombreCompleto}" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px;">
+                        <label class="label-form">Cuenta:</label>
+                        <div>
+                            <h:outputText value="#{consultarSaldoBean.cuenta}" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px;">
+                        <label class="label-form">Saldo disponible:</label>
+                        <div>
+                            <h:outputText value="#{consultarSaldoBean.saldoDisponible}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                    <h:commandButton value="Volver" action="/menu.xhtml?faces-redirect=true" styleClass="btn-confirmar" />
+                    <h:commandButton value="Cerrar Sesión" action="#{LoginBean.cerrarSesion}" styleClass="btn-salir" />
+                </div>
+
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

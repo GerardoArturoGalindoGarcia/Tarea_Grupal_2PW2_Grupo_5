@@ -21,6 +21,7 @@ public class LoginBean implements Serializable {
     private String usuario;
     private String pin;
     private Cliente cliente;
+
     private final ArchivoClientes archivoClientes = new ArchivoClientes();
 
 
