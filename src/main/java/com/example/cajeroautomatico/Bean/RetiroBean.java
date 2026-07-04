@@ -49,7 +49,7 @@ public class RetiroBean implements Serializable {
                         null,
                         new FacesMessage(
                                 FacesMessage.SEVERITY_ERROR,
-                                "Error",
+                                "Error - Ingrese un monto mayor a cero",
                                 "Ingrese un monto mayor a cero."
                         )
                 );
@@ -62,7 +62,7 @@ public class RetiroBean implements Serializable {
                         null,
                         new FacesMessage(
                                 FacesMessage.SEVERITY_ERROR,
-                                "Error",
+                                "Error - Saldo insuficiente",
                                 "Saldo insuficiente."
                         )
                 );

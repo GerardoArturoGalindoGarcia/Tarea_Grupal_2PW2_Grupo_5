@@ -33,7 +33,7 @@ public class LoginBean implements Serializable {
                         null,
                         new FacesMessage(
                                 FacesMessage.SEVERITY_ERROR,
-                                "Error",
+                                "Error - Usuario / Pin son requeridos",
                                 "Usuario y PIN son requeridos."
                         )
                 );
@@ -54,7 +54,7 @@ public class LoginBean implements Serializable {
                     null,
                     new FacesMessage(
                             FacesMessage.SEVERITY_ERROR,
-                            "Error",
+                            "Error - Usuario / Pin incorrectos",
                             "Usuario o PIN incorrectos."
                     )
             );

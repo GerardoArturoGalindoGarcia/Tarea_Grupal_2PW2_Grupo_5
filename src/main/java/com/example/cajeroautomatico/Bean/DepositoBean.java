@@ -31,13 +31,15 @@ public class DepositoBean implements Serializable {
 
 
         if (LoginBean == null || LoginBean.getCliente() == null) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No hay ninguna sesión de cliente activa."));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error No ha iniciado sesión",
+                    "No hay ninguna sesión de cliente activa."));
             return null;
         }
 
 
         if (montoDeposito == null || montoDeposito <= 0) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Monto inválido. Debe ser mayor a cero."));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error  - Monto a depositar debe ser mayo a cero",
+                    "Monto inválido. Debe ser mayor a cero."));
             return null;
         }
 
@@ -47,7 +49,9 @@ public class DepositoBean implements Serializable {
 
             String pinCliente = (String) clienteActual.getClass().getMethod("getPin").invoke(clienteActual);
             if (pinIngresado == null || !pinIngresado.equals(pinCliente)) {
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "PIN inválido."));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "PIN inválido: El código de seguridad ingresado no es correcto.",
+                        "PIN inválido."));
                 return null;
             }
 
