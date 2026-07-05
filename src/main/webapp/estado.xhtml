@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:pt="jakarta.faces.passthrough">
+
+<ui:composition template="/layout.xhtml">
+    <ui:define name="title">Estado de Cuenta - Cajero Automático</ui:define>
+
+    <ui:define name="content">
+        <div class="contenedor">
+            <h:form id="formEstado">
+                <div class="encabezado-modulo">
+                    <h2>Estado de Cuenta</h2>
+                    <hr style="border: 1px solid #003B8E;"/>
+                </div>
+
+                <h:messages id="mensajes" globalOnly="false"
+                            errorStyle="color: red; list-style-type: none; font-weight: bold; margin-bottom: 15px;"
+                            infoStyle="color: green; list-style-type: none; font-weight: bold; margin-bottom: 15px;"/>
+
+                <h:panelGroup rendered="#{estadoCuentaBean.loginBean.cliente == null}">
+                    <p style="color: red; font-weight: bold;">
+                        No hay sesión activa. Por favor inicie sesión primero.
+                    </p>
+                    <h:commandButton value="Ir al Login"
+                                     action="/Login.xhtml?faces-redirect=true"
+                                     styleClass="btn-confirmar"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{estadoCuentaBean.loginBean.cliente != null}">
+                    <h:panelGrid columns="2" cellpadding="10" styleClass="grid-datos">
+                        <h:outputLabel value="Nombre del Cliente:" style="font-weight: bold;"/>
+                        <h:outputText value="#{estadoCuentaBean.loginBean.cliente.nombreCompleto}"
+                                      style="font-weight: bold; color: #555;"/>
+
+                        <h:outputLabel value="Número de Cuenta:" style="font-weight: bold;"/>
+                        <h:outputText value="#{estadoCuentaBean.loginBean.cliente.cuenta}"
+                                      style="color: #555;"/>
+                    </h:panelGrid>
+
+                    <hr style="border: 1px solid #eee; margin-bottom: 15px;"/>
+
+                    <h:panelGrid columns="4" cellpadding="8" style="margin-bottom: 15px;">
+                        <h:outputLabel value="Fecha inicial:" styleClass="label-form"/>
+                        <h:inputText id="fechaInicio"
+                                     value="#{estadoCuentaBean.fechaInicio}"
+                                     styleClass="input-form"
+                                     pt:type="date"/>
+
+                        <h:outputLabel value="Fecha final:" styleClass="label-form"/>
+                        <h:inputText id="fechaFin"
+                                     value="#{estadoCuentaBean.fechaFin}"
+                                     styleClass="input-form"
+                                     pt:type="date"/>
+                    </h:panelGrid>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <h:commandButton value="Filtrar"
+                                         action="#{estadoCuentaBean.filtrar}"
+                                         styleClass="btn-confirmar"/>
+
+                        <h:commandButton value="Limpiar filtro"
+                                         action="#{estadoCuentaBean.limpiarFiltro}"
+                                         style="background-color: #607D8B; color: white; padding: 12px 20px;
+                                                border: none; border-radius: 8px; cursor: pointer; font-weight: bold;"/>
+
+                        <h:commandButton value="Salir"
+                                         action="menu?faces-redirect=true"
+                                         immediate="true"
+                                         styleClass="btn-salir"/>
+                    </div>
+
+                    <p style="font-size: 13px; color: #607D8B; margin-bottom: 8px;">
+                        Mostrando <h:outputText value="#{estadoCuentaBean.transacciones.size()}"/> transacciones
+                    </p>
+
+                    <h:dataTable id="tablaTransacciones"
+                                 value="#{estadoCuentaBean.transacciones}"
+                                 var="tx"
+                                 styleClass="tabla-estado"
+                                 style="width:100%; border-collapse:collapse; font-size:14px;"
+                                 headerClass="tabla-cabecera"
+                                 rowClasses="fila-par,fila-impar">
+
+                        <h:column>
+                            <f:facet name="header">Fecha</f:facet>
+                            <h:outputText value="#{tx.fechaFormateada}"
+                                          style="font-family: monospace; font-size: 13px;"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Tipo de Transacción</f:facet>
+                            <h:outputText value="#{tx.tipoTransaccion}"
+                                          style="font-weight: bold;
+                                                 color: #{tx.tipoTransaccion == 'DEPOSITO' ? '#007A3D' : '#d32f2f'};"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Monto</f:facet>
+                            <h:outputText value="#{tx.montoFormateado}"
+                                          style="font-family: monospace; font-weight: bold;
+                                                 color: #{tx.tipoTransaccion == 'DEPOSITO' ? '#007A3D' : '#d32f2f'};"/>
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:panelGroup rendered="#{empty estadoCuentaBean.transacciones}">
+                        <p style="text-align: center; color: #888; padding: 20px;
+                                  border: 2px dashed #ccc; border-radius: 8px; margin-top: 10px;">
+                            No se encontraron transacciones.
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:form>
+        </div>
+
+        <style>
+            .tabla-cabecera th {
+                background: linear-gradient(90deg, #0052A3, #003B8E);
+                color: white;
+                font-size: 13px;
+                text-transform: uppercase;
+                padding: 11px 16px;
+                text-align: left;
+            }
+
+            .tabla-estado td {
+                padding: 10px 16px;
+                border-bottom: 1px solid #e8edf5;
+            }
+
+            .fila-par td {
+                background: #ffffff;
+            }
+
+            .fila-impar td {
+                background: #F5F8FF;
+            }
+        </style>
+    </ui:define>
+</ui:composition>
+</html>
