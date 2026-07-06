@@ -12,7 +12,7 @@ import java.util.List;
 public class ArchivoEstadoCuenta {
 
     // Lee el mismo archivo donde Retiro y Depósito guardan las transacciones.
-    private static final String FILE_PATH = "HISTORIAL.TXT";
+    private static final String FILE_PATH = "/WEB-INF/HISTORIAL.txt";
 
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

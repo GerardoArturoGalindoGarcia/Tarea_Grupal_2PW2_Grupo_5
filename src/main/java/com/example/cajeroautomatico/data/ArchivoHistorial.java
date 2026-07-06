@@ -9,9 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class ArchivoHistorial {
 
     // Se guardará en la raíz del proyecto o donde corra el servidor Tomcat
-    private static final String FILE_PATH = "HISTORIAL.TXT";
+    private static final String FILE_PATH = "/WEB-INF/HISTORIAL.txt";
 
     public void registrarTransaccion(String usuario, String cuenta, String tipo, double monto) {
+
+        System.out.println("Ruta absoluta: " + new java.io.File(FILE_PATH).getAbsolutePath());
+
         // Formato de fecha estándar (Año-Mes-Día Hora:Minutos:Segundos)
         String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
