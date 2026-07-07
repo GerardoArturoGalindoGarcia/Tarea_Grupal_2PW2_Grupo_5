@@ -7,40 +7,156 @@
 
 <ui:composition template="/layout.xhtml">
     <ui:define name="title">Consulta de Saldo - Cajero Automático</ui:define>
+    <ui:define name="head">
+        <style>
+            .card-saldo {
+                background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 20px;
+                box-shadow: 0 5px 20px rgba(0, 59, 142, 0.2);
+                color: white;
+            }
+            
+            .card-saldo .dato-item {
+                margin-bottom: 20px;
+            }
+            
+            .card-saldo .dato-label {
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                opacity: 0.85;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+            
+            .card-saldo .dato-valor {
+                font-size: 24px;
+                font-weight: 700;
+                word-break: break-word;
+            }
+            
+            .saldo-valor {
+                font-size: 32px;
+                font-weight: 800;
+                background: rgba(255,255,255,0.1);
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+                margin-top: 10px;
+                border-left: 4px solid #FFD700;
+            }
+            
+            .divider-saldo {
+                height: 1px;
+                background: rgba(255,255,255,0.2);
+                margin: 15px 0;
+            }
+            
+            .info-icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                text-align: center;
+                line-height: 24px;
+                margin-right: 8px;
+                font-weight: bold;
+            }
+            
+            .botones-contenedor {
+                display: flex;
+                gap: 12px;
+                margin-top: 25px;
+                justify-content: flex-end;
+            }
+            
+            .btn-volver {
+                background-color: #004b87;
+                color: white;
+                padding: 12px 28px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+            }
+            
+            .btn-volver:hover {
+                background-color: #003366;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,51,102,0.3);
+            }
+            
+            .btn-cerrar {
+                background-color: #d32f2f;
+                color: white;
+                padding: 12px 28px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+            }
+            
+            .btn-cerrar:hover {
+                background-color: #b71c1c;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(179,28,28,0.3);
+            }
+        </style>
+    </ui:define>
+    
     <ui:define name="content">
         <div class="contenedor">
             <h:form id="formConsulta">
                 <div class="encabezado-modulo">
-                    <h2>Módulo de Consulta de Saldo</h2>
+                    <h2>💰 Consulta de Saldo</h2>
                     <hr style="border: 1px solid #003B8E;"/>
                 </div>
 
-                <div class="grid-datos">
-                    <div>
-                        <label class="label-form">Nombre completo:</label>
-                        <div>
+                <div class="card-saldo">
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">👤</span>Titular de la Cuenta
+                        </div>
+                        <div class="dato-valor">
                             <h:outputText value="#{consultarSaldoBean.nombreCompleto}" />
                         </div>
                     </div>
 
-                    <div style="margin-top:10px;">
-                        <label class="label-form">Cuenta:</label>
-                        <div>
+                    <div class="divider-saldo"></div>
+
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">🏦</span>Número de Cuenta
+                        </div>
+                        <div class="dato-valor">
                             <h:outputText value="#{consultarSaldoBean.cuenta}" />
                         </div>
                     </div>
 
-                    <div style="margin-top:10px;">
-                        <label class="label-form">Saldo disponible:</label>
-                        <div>
-                            <h:outputText value="#{consultarSaldoBean.saldoDisponible}" />
+                    <div class="divider-saldo"></div>
+
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">💵</span>Saldo Disponible
+                        </div>
+                        <div class="saldo-valor">
+                            L. <h:outputText value="#{consultarSaldoBean.saldoDisponible}">
+                                <f:convertNumber type="currency" currencySymbol="" pattern="0.00"/>
+                            </h:outputText>
                         </div>
                     </div>
                 </div>
 
-                <div style="display:flex; justify-content:space-between; margin-top:20px;">
-                    <h:commandButton value="Volver" action="/menu.xhtml?faces-redirect=true" styleClass="btn-confirmar" />
-                    <h:commandButton value="Cerrar Sesión" action="#{LoginBean.cerrarSesion}" styleClass="btn-salir" />
+                <div class="botones-contenedor">
+                    <h:commandButton value="← Volver al Menú" action="/menu.xhtml?faces-redirect=true" styleClass="btn-volver" />
+                    <h:commandButton value="Cerrar Sesión ×" action="#{LoginBean.cerrarSesion}" styleClass="btn-cerrar" />
                 </div>
 
             </h:form>
