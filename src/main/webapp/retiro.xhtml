@@ -6,49 +6,227 @@
 
 <ui:composition template="/layout.xhtml">
     <ui:define name="title">Retiros - Cajero Automático</ui:define>
+    
+    <ui:define name="head">
+        <style>
+            .card-transaccion {
+                background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 20px;
+                box-shadow: 0 5px 20px rgba(0, 59, 142, 0.2);
+                color: white;
+            }
+            
+            .card-transaccion .dato-item {
+                margin-bottom: 15px;
+            }
+            
+            .card-transaccion .dato-label {
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                opacity: 0.85;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+            
+            .card-transaccion .dato-valor {
+                font-size: 18px;
+                font-weight: 700;
+                word-break: break-word;
+            }
+            
+            .divider-transaccion {
+                height: 1px;
+                background: rgba(255,255,255,0.2);
+                margin: 15px 0;
+            }
+            
+            .info-icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                text-align: center;
+                line-height: 24px;
+                margin-right: 8px;
+                font-weight: bold;
+            }
+            
+            .form-transaccion {
+                background: rgba(5, 82, 163, 0.08);
+                padding: 25px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                border-left: 4px solid #0052A3;
+            }
+            
+            .grid-transaccion {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .campo-transaccion {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .campo-transaccion label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #0052A3;
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .campo-transaccion input {
+                padding: 12px;
+                border: 1px solid #d0d0d0;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                box-sizing: border-box;
+            }
+            
+            .campo-transaccion input:focus {
+                outline: none;
+                border-color: #0052A3;
+                box-shadow: 0 0 8px rgba(5, 82, 163, 0.2);
+                background: #fafbfc;
+            }
+            
+            .botones-contenedor {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                margin-top: 25px;
+            }
+            
+            .btn-confirmar {
+                background-color: #0052A3;
+                color: white;
+                padding: 14px 32px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+                flex: 1;
+                max-width: 200px;
+            }
+            
+            .btn-confirmar:hover {
+                background-color: #003B8E;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 82, 163, 0.3);
+            }
+            
+            .btn-salir {
+                background-color: #d32f2f;
+                color: white;
+                padding: 14px 32px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+                flex: 1;
+                max-width: 200px;
+            }
+            
+            .btn-salir:hover {
+                background-color: #b71c1c;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(179, 28, 28, 0.3);
+            }
+        </style>
+    </ui:define>
+    
     <ui:define name="content">
         <div class="contenedor">
             <h:form id="formRetiro">
                 <div class="encabezado-modulo">
-                    <h2>Módulo de Retiros</h2>
+                    <h2>💸 Módulo de Retiros</h2>
                     <hr style="border: 1px solid #003B8E;"/>
                 </div>
-
 
                 <h:messages id="mensajes" globalOnly="false" styleClass="mensajes-sistema"
                             errorStyle="color: red; list-style-type: none; font-weight: bold; margin-bottom: 15px;"
                             infoStyle="color: green; list-style-type: none; font-weight: bold; margin-bottom: 15px;"/>
 
-                <h:panelGrid columns="2" cellpadding="10" styleClass="grid-datos">
+                <div class="card-transaccion">
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">👤</span>Titular de la Cuenta
+                        </div>
+                        <div class="dato-valor">
+                            <h:outputText value="#{LoginBean.cliente.nombreCompleto}"/>
+                        </div>
+                    </div>
 
-                    <h:outputLabel value="Nombre del Cliente:" style="font-weight: bold;"/>
-                    <h:outputText value="#{LoginBean.cliente.nombreCompleto}" style="font-weight: bold; color: #555;" />
+                    <div class="divider-transaccion"></div>
 
-                    <h:outputLabel value="Número de Cuenta:" style="font-weight: bold;"/>
-                    <h:outputText value="#{LoginBean.cliente.cuenta}" style="color: #555;" />
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">🏦</span>Número de Cuenta
+                        </div>
+                        <div class="dato-valor">
+                            <h:outputText value="#{LoginBean.cliente.cuenta}"/>
+                        </div>
+                    </div>
 
-                    <h:outputLabel value="Monto Disponible:" style="font-weight: bold;"/>
-                    <h:outputText value="L. #{LoginBean.cliente.saldoDisponible}" style="color: green; font-weight: bold;"  />
+                    <div class="divider-transaccion"></div>
 
-                    <h:outputLabel value="Monto a Retirar (L.):" styleClass="label-form"/>
-                    <h:inputText id="monto" value="#{retiroBean.montoTransaccion}" required="true" styleClass="input-form"
-                                 autocomplete="off" requiredMessage="Por favor, ingrese un monto a retirar.">
-                        <f:passThroughAttribute name="placeholder" value="0.00" />
-                        <f:passThroughAttribute name="onfocus" value="if(this.value=='0.00' || this.value=='0') this.value='';" />
-                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-                    </h:inputText>
-
-                    <h:outputLabel value="PIN de Seguridad:" styleClass="label-form"/>
-                    <h:inputSecret id="pin" value="#{retiroBean.pinIngresado}" required="true" styleClass="input-form"
-                                   requiredMessage="Por favor, ingrese su PIN para confirmar." maxlength="4"/>
-
-                </h:panelGrid>
-
-                <div class="botones-accion" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
-                    <h:commandButton value="Confirmar Retiro" action="#{retiroBean.procesarRetiro}" styleClass="btn-confirmar"/>
-                    <h:commandButton value="Salir" action="menu?faces-redirect=true" immediate="true" styleClass="btn-salir"/>
+                    <div class="dato-item">
+                        <div class="dato-label">
+                            <span class="info-icon">💵</span>Saldo Disponible
+                        </div>
+                        <div class="dato-valor" style="font-size: 24px; color: #FFD700;">
+                            L. <h:outputText value="#{LoginBean.cliente.saldoDisponible}">
+                                <f:convertNumber type="currency" currencySymbol="" pattern="0.00"/>
+                            </h:outputText>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="form-transaccion">
+                    <h3 style="margin: 0 0 20px 0; color: #0052A3; font-size: 16px;">
+                        💰 Ingresar Monto a Retirar
+                    </h3>
+
+                    <div class="grid-transaccion">
+                        <div class="campo-transaccion">
+                            <label for="monto">Monto (L.):</label>
+                            <h:inputText id="monto" value="#{retiroBean.montoTransaccion}" required="true"
+                                         autocomplete="off" requiredMessage="Por favor, ingrese un monto a retirar.">
+                                <f:passThroughAttribute name="placeholder" value="0.00" />
+                                <f:passThroughAttribute name="onfocus" value="if(this.value=='0.00' || this.value=='0') this.value='';" />
+                                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                            </h:inputText>
+                        </div>
+
+                        <div class="campo-transaccion">
+                            <label for="pin">PIN de Seguridad:</label>
+                            <h:inputSecret id="pin" value="#{retiroBean.pinIngresado}" required="true"
+                                           requiredMessage="Por favor, ingrese su PIN para confirmar." maxlength="4"
+                                           autocomplete="off">
+                                <f:passThroughAttribute name="placeholder" value="••••" />
+                            </h:inputSecret>
+                        </div>
+                    </div>
+
+                    <div class="botones-contenedor">
+                        <h:commandButton value="✓ Confirmar Retiro" action="#{retiroBean.procesarRetiro}" styleClass="btn-confirmar"/>
+                        <h:commandButton value="← Salir" action="menu?faces-redirect=true" immediate="true" styleClass="btn-salir"/>
+                    </div>
+                </div>
             </h:form>
         </div>
     </ui:define>
