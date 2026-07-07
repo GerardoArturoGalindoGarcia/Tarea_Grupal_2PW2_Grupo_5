@@ -1,6 +1,7 @@
 package com.example.cajeroautomatico.data;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -8,12 +9,13 @@ import java.time.format.DateTimeFormatter;
 
 public class ArchivoHistorial {
 
-    // Se guardará en la raíz del proyecto o donde corra el servidor Tomcat
-    private static final String FILE_PATH = "/WEB-INF/HISTORIAL.txt";
+    private static String getFilePath() {
+        String basePath = new File("").getAbsolutePath();
+        String filePath = new File(basePath, "HISTORIAL.TXT").getAbsolutePath();
+        return filePath;
+    }
 
     public void registrarTransaccion(String usuario, String cuenta, String tipo, double monto) {
-
-        System.out.println("Ruta absoluta: " + new java.io.File(FILE_PATH).getAbsolutePath());
 
         // Formato de fecha estándar (Año-Mes-Día Hora:Minutos:Segundos)
         String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -22,7 +24,7 @@ public class ArchivoHistorial {
         String linea = String.format("%s,%s,%s,%s,%.2f", usuario, cuenta, fecha, tipo, monto);
 
         // El parámetro 'true' habilita el modo Append para añadir líneas al final sin borrar lo previo
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFilePath(), true))) {
             bw.write(linea);
             bw.newLine();
             System.out.println("HISTORIAL REGISTRADO: " + tipo + " de L. " + monto + " para la cuenta " + cuenta);

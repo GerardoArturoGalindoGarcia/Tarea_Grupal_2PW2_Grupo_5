@@ -11,15 +11,18 @@ import java.util.List;
 
 public class ArchivoEstadoCuenta {
 
-    // Lee el mismo archivo donde Retiro y Depósito guardan las transacciones.
-    private static final String FILE_PATH = "/WEB-INF/HISTORIAL.txt";
+    private static String getFilePath() {
+        String basePath = new File("").getAbsolutePath();
+        String filePath = new File(basePath, "HISTORIAL.TXT").getAbsolutePath();
+        return filePath;
+    }
 
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public List<Transaccion> obtenerTodas() {
         List<Transaccion> lista = new ArrayList<>();
-        File archivo = new File(FILE_PATH);
+        File archivo = new File(getFilePath());
 
         if (!archivo.exists()) {
             System.out.println("No existe HISTORIAL.TXT todavía. Estado de cuenta vacío.");
