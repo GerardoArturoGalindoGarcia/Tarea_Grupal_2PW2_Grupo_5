@@ -7,12 +7,214 @@
 
 <ui:composition template="/layout.xhtml">
     <ui:define name="title">Estado de Cuenta - Cajero Automático</ui:define>
+    
+    <ui:define name="head">
+        <style>
+            .card-estado {
+                background: linear-gradient(135deg, #0052A3 0%, #003B8E 100%);
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 20px;
+                box-shadow: 0 5px 20px rgba(0, 59, 142, 0.2);
+                color: white;
+            }
+            
+            .card-estado .dato-item {
+                margin-bottom: 15px;
+            }
+            
+            .card-estado .dato-label {
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                opacity: 0.85;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+            
+            .card-estado .dato-valor {
+                font-size: 18px;
+                font-weight: 700;
+                word-break: break-word;
+            }
+            
+            .divider-estado {
+                height: 1px;
+                background: rgba(255,255,255,0.2);
+                margin: 15px 0;
+            }
+            
+            .info-icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                text-align: center;
+                line-height: 24px;
+                margin-right: 8px;
+                font-weight: bold;
+            }
+            
+            .filtros-contenedor {
+                background: rgba(5, 82, 163, 0.08);
+                padding: 20px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                border-left: 4px solid #0052A3;
+            }
+            
+            .grid-filtros {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .campo-filtro {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .campo-filtro label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #0052A3;
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .campo-filtro input {
+                padding: 10px 12px;
+                border: 1px solid #d0d0d0;
+                border-radius: 6px;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+            }
+            
+            .campo-filtro input:focus {
+                outline: none;
+                border-color: #0052A3;
+                box-shadow: 0 0 8px rgba(5, 82, 163, 0.1);
+            }
+            
+            .botones-contenedor {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            
+            .btn-confirmar {
+                background-color: #0052A3;
+                color: white;
+                padding: 12px 28px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+            }
+            
+            .btn-confirmar:hover {
+                background-color: #003B8E;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 82, 163, 0.3);
+            }
+            
+            .btn-limpiar {
+                background-color: #607D8B;
+                color: white;
+                padding: 12px 28px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+            }
+            
+            .btn-limpiar:hover {
+                background-color: #455A64;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(96, 125, 139, 0.3);
+            }
+            
+            .btn-salir {
+                background-color: #d32f2f;
+                color: white;
+                padding: 12px 28px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                font-size: 14px;
+            }
+            
+            .btn-salir:hover {
+                background-color: #b71c1c;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(179, 28, 28, 0.3);
+            }
+            
+            .contador-transacciones {
+                font-size: 14px;
+                color: #0052A3;
+                font-weight: 600;
+                margin-bottom: 15px;
+                padding: 10px;
+                background: rgba(5, 82, 163, 0.08);
+                border-radius: 6px;
+                border-left: 3px solid #0052A3;
+            }
+            
+            .tabla-cabecera th {
+                background: linear-gradient(90deg, #0052A3, #003B8E);
+                color: white;
+                font-size: 13px;
+                text-transform: uppercase;
+                padding: 12px 16px;
+                text-align: left;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+
+            .tabla-estado td {
+                padding: 12px 16px;
+                border-bottom: 1px solid #e8edf5;
+            }
+
+            .fila-par td {
+                background: #ffffff;
+            }
+
+            .fila-impar td {
+                background: #F5F8FF;
+            }
+            
+            .tabla-estado tr:hover td {
+                background: rgba(5, 82, 163, 0.05);
+            }
+            
+            .sin-transacciones {
+                text-align: center;
+                color: #888;
+                padding: 30px 20px;
+                border: 2px dashed #ccc;
+                border-radius: 8px;
+                margin-top: 15px;
+                background: #fafafa;
+            }
+        </style>
+    </ui:define>
 
     <ui:define name="content">
         <div class="contenedor">
             <h:form id="formEstado">
                 <div class="encabezado-modulo">
-                    <h2>Estado de Cuenta</h2>
+                    <h2>📋 Estado de Cuenta</h2>
                     <hr style="border: 1px solid #003B8E;"/>
                 </div>
 
@@ -30,51 +232,68 @@
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{estadoCuentaBean.loginBean.cliente != null}">
-                    <h:panelGrid columns="2" cellpadding="10" styleClass="grid-datos">
-                        <h:outputLabel value="Nombre del Cliente:" style="font-weight: bold;"/>
-                        <h:outputText value="#{estadoCuentaBean.loginBean.cliente.nombreCompleto}"
-                                      style="font-weight: bold; color: #555;"/>
+                    <div class="card-estado">
+                        <div class="dato-item">
+                            <div class="dato-label">
+                                <span class="info-icon">👤</span>Titular de la Cuenta
+                            </div>
+                            <div class="dato-valor">
+                                <h:outputText value="#{estadoCuentaBean.loginBean.cliente.nombreCompleto}"/>
+                            </div>
+                        </div>
 
-                        <h:outputLabel value="Número de Cuenta:" style="font-weight: bold;"/>
-                        <h:outputText value="#{estadoCuentaBean.loginBean.cliente.cuenta}"
-                                      style="color: #555;"/>
-                    </h:panelGrid>
+                        <div class="divider-estado"></div>
 
-                    <hr style="border: 1px solid #eee; margin-bottom: 15px;"/>
-
-                    <h:panelGrid columns="4" cellpadding="8" style="margin-bottom: 15px;">
-                        <h:outputLabel value="Fecha inicial:" styleClass="label-form"/>
-                        <h:inputText id="fechaInicio"
-                                     value="#{estadoCuentaBean.fechaInicio}"
-                                     styleClass="input-form"
-                                     pt:type="date"/>
-
-                        <h:outputLabel value="Fecha final:" styleClass="label-form"/>
-                        <h:inputText id="fechaFin"
-                                     value="#{estadoCuentaBean.fechaFin}"
-                                     styleClass="input-form"
-                                     pt:type="date"/>
-                    </h:panelGrid>
-
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                        <h:commandButton value="Filtrar"
-                                         action="#{estadoCuentaBean.filtrar}"
-                                         styleClass="btn-confirmar"/>
-
-                        <h:commandButton value="Limpiar filtro"
-                                         action="#{estadoCuentaBean.limpiarFiltro}"
-                                         style="background-color: #607D8B; color: white; padding: 12px 20px;
-                                                border: none; border-radius: 8px; cursor: pointer; font-weight: bold;"/>
-
-                        <h:commandButton value="Salir"
-                                         action="menu?faces-redirect=true"
-                                         immediate="true"
-                                         styleClass="btn-salir"/>
+                        <div class="dato-item">
+                            <div class="dato-label">
+                                <span class="info-icon">🏦</span>Número de Cuenta
+                            </div>
+                            <div class="dato-valor">
+                                <h:outputText value="#{estadoCuentaBean.loginBean.cliente.cuenta}"/>
+                            </div>
+                        </div>
                     </div>
 
-                    <p style="font-size: 13px; color: #607D8B; margin-bottom: 8px;">
-                        Mostrando <h:outputText value="#{estadoCuentaBean.transacciones.size()}"/> transacciones
-                    </p>
+                    <div class="filtros-contenedor">
+                        <h3 style="margin: 0 0 15px 0; color: #0052A3; font-size: 16px;">
+                            🔍 Filtrar Transacciones
+                        </h3>
+                        
+                        <div class="grid-filtros">
+                            <div class="campo-filtro">
+                                <label for="fechaInicio">Fecha inicial:</label>
+                                <h:inputText id="fechaInicio"
+                                            value="#{estadoCuentaBean.fechaInicio}"
+                                            pt:type="date"/>
+                            </div>
+
+                            <div class="campo-filtro">
+                                <label for="fechaFin">Fecha final:</label>
+                                <h:inputText id="fechaFin"
+                                            value="#{estadoCuentaBean.fechaFin}"
+                                            pt:type="date"/>
+                            </div>
+                        </div>
+
+                        <div class="botones-contenedor">
+                            <h:commandButton value="🔎 Filtrar"
+                                             action="#{estadoCuentaBean.filtrar}"
+                                             styleClass="btn-confirmar"/>
+
+                            <h:commandButton value="🔄 Limpiar filtro"
+                                             action="#{estadoCuentaBean.limpiarFiltro}"
+                                             styleClass="btn-limpiar"/>
+
+                            <h:commandButton value="← Volver al Menú"
+                                             action="menu?faces-redirect=true"
+                                             immediate="true"
+                                             styleClass="btn-salir"/>
+                        </div>
+                    </div>
+
+                    <div class="contador-transacciones">
+                        📊 Mostrando <strong><h:outputText value="#{estadoCuentaBean.transacciones.size()}"/></strong> transacciones
+                    </div>
 
                     <h:dataTable id="tablaTransacciones"
                                  value="#{estadoCuentaBean.transacciones}"
@@ -85,7 +304,7 @@
                                  rowClasses="fila-par,fila-impar">
 
                         <h:column>
-                            <f:facet name="header">Fecha</f:facet>
+                            <f:facet name="header">📅 Fecha</f:facet>
                             <h:outputText value="#{tx.fechaFormateada}"
                                           style="font-family: monospace; font-size: 13px;"/>
                         </h:column>
@@ -98,7 +317,7 @@
                         </h:column>
 
                         <h:column>
-                            <f:facet name="header">Monto</f:facet>
+                            <f:facet name="header">💰 Monto</f:facet>
                             <h:outputText value="#{tx.montoFormateado}"
                                           style="font-family: monospace; font-weight: bold;
                                                  color: #{tx.tipoTransaccion == 'DEPOSITO' ? '#007A3D' : '#d32f2f'};"/>
@@ -106,38 +325,13 @@
                     </h:dataTable>
 
                     <h:panelGroup rendered="#{empty estadoCuentaBean.transacciones}">
-                        <p style="text-align: center; color: #888; padding: 20px;
-                                  border: 2px dashed #ccc; border-radius: 8px; margin-top: 10px;">
+                        <p class="sin-transacciones">
                             No se encontraron transacciones.
                         </p>
                     </h:panelGroup>
                 </h:panelGroup>
             </h:form>
         </div>
-
-        <style>
-            .tabla-cabecera th {
-                background: linear-gradient(90deg, #0052A3, #003B8E);
-                color: white;
-                font-size: 13px;
-                text-transform: uppercase;
-                padding: 11px 16px;
-                text-align: left;
-            }
-
-            .tabla-estado td {
-                padding: 10px 16px;
-                border-bottom: 1px solid #e8edf5;
-            }
-
-            .fila-par td {
-                background: #ffffff;
-            }
-
-            .fila-impar td {
-                background: #F5F8FF;
-            }
-        </style>
     </ui:define>
 </ui:composition>
 </html>
