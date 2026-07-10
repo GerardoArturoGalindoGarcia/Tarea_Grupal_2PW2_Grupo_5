@@ -177,12 +177,33 @@ usuario5,5555,Ricardo Andres Montes Jovel,100005,4100.80,2026-01-11 11:50:00
 
 #Imagenes
 
-<img width="822" height="552" alt="image" src="https://github.com/user-attachments/assets/876d5ec0-38c0-4993-af22-96c7337380d1" />
-<img width="1602" height="620" alt="image" src="https://github.com/user-attachments/assets/7768a115-d117-4827-82b2-a44c6fce1f80" />
-<img width="1862" height="607" alt="image" src="https://github.com/user-attachments/assets/5407b342-7d95-4c2d-badd-1550ef8cfdce" />
-<img width="1860" height="632" alt="image" src="https://github.com/user-attachments/assets/cdeb7ca6-cad6-4cd0-acc9-bca8bd0bc3ef" />
-<img width="1852" height="497" alt="image" src="https://github.com/user-attachments/assets/f229ac8b-3d6c-4f36-a198-36010e404aa2" />
-<img width="1862" height="772" alt="image" src="https://github.com/user-attachments/assets/d4a16e79-1e65-4881-a735-4351bb6c739d" />
+LOGIN
+
+<img width="403" height="608" alt="image" src="https://github.com/user-attachments/assets/77488713-56a1-4e80-a337-2c87ed797c06" />
+
+MENU PRINCIPAL
+
+<img width="377" height="619" alt="image" src="https://github.com/user-attachments/assets/e6a5deca-3fca-49d2-ac09-a416b92c9bfd" />
+
+RETIRO
+
+<img width="442" height="556" alt="image" src="https://github.com/user-attachments/assets/86e31445-ac95-46cc-8cc3-6169e178deee" />
+
+DEPOSITO
+
+<img width="430" height="561" alt="image" src="https://github.com/user-attachments/assets/23bdbfec-3cd7-4f97-a73d-050f654f9d8f" />
+
+CONSULTA DE SALDO
+
+<img width="469" height="503" alt="image" src="https://github.com/user-attachments/assets/2df12f6b-1320-4e75-9c20-2882ada1a700" />
+
+ESTADO DE CUENTA
+
+<img width="397" height="645" alt="image" src="https://github.com/user-attachments/assets/e4610954-dd3d-4443-824c-49a261d66000" />
+
+
+
+
 
 
 
