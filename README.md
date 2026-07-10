@@ -151,6 +151,16 @@ Agregar los nombres de los integrantes del grupo.
 
 ---
 
+#Usuarios
+
+usuario1,1111,William Eduardo Banegas Cruz,100001,2500.50,2026-01-15 10:30:00
+usuario2,2222,Gerardo Arturo Galindo Garcia,100002,1850.75,2026-01-14 14:45:00
+usuario3,3333,Katherine Marisol Villanueva Alvarado,100003,3200.00,2026-01-13 09:15:00
+usuario4,4444,Mathaly Melissa Aguilar Gomez,100004,1500.25,2026-01-12 16:20:00
+usuario5,5555,Ricardo Andres Montes Jovel,100005,4100.80,2026-01-11 11:50:00
+
+---
+
 #Objetivos del proyecto
 
 - Aplicar los conceptos de Programación Web II.
