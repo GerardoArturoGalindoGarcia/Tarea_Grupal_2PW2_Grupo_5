@@ -160,3 +160,18 @@ Agregar los nombres de los integrantes del grupo.
 - Comprender la interacción entre la interfaz web y la lógica de negocio.
 
 ---
+
+#Imagenes
+
+<img width="822" height="552" alt="image" src="https://github.com/user-attachments/assets/876d5ec0-38c0-4993-af22-96c7337380d1" />
+<img width="1602" height="620" alt="image" src="https://github.com/user-attachments/assets/7768a115-d117-4827-82b2-a44c6fce1f80" />
+<img width="1862" height="607" alt="image" src="https://github.com/user-attachments/assets/5407b342-7d95-4c2d-badd-1550ef8cfdce" />
+<img width="1860" height="632" alt="image" src="https://github.com/user-attachments/assets/cdeb7ca6-cad6-4cd0-acc9-bca8bd0bc3ef" />
+<img width="1852" height="497" alt="image" src="https://github.com/user-attachments/assets/f229ac8b-3d6c-4f36-a198-36010e404aa2" />
+<img width="1862" height="772" alt="image" src="https://github.com/user-attachments/assets/d4a16e79-1e65-4881-a735-4351bb6c739d" />
+
+
+
+
+
+
